@@ -1,5 +1,7 @@
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
-  return <div className="App">App</div>;
+      <ToastContainer limit={3} />
 }
 
 export default App;
