@@ -12,7 +12,7 @@ export const palette: PaletteOptions = {
     main: SECONDARY_COLOR,
   },
   common: {
-    white: "#fffbff",
+    white: "#ffffff",
     black: "#1F1E26",
   },
 };

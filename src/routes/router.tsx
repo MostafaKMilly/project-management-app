@@ -1,5 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Login, Projects, Signup } from "@/pages";
+import { Login, Projects, Signup, ProjectsTasks } from "@/pages";
+import { MainLayout } from "@/layouts";
+import { TasksList } from "@/pages/projects/views/tasksList";
 
 const router = createBrowserRouter([
   {
@@ -15,9 +17,25 @@ const router = createBrowserRouter([
     action: Signup.action,
   },
   {
-    path: "/projects",
-    element: <Projects />,
-    loader: Projects.loader,
+    path: "/",
+    element: <MainLayout />,
+    loader: MainLayout.loader,
+    children: [
+      {
+        path: "projects",
+        element: <Projects />,
+        children: [
+          {
+            index: true,
+            element: <TasksList />,
+          },
+          {
+            path: ":taskId",
+            element: <ProjectsTasks />,
+          },
+        ],
+      },
+    ],
   },
 ]);
 
