@@ -4,12 +4,6 @@ import { Task } from "../types";
 
 export const selectTasks = (state: RootState): Task[] => state.task.tasks;
 
-export const selectTasksByProjectId = createSelector(
-  selectTasks,
-  (_: RootState, projectId: string) => projectId,
-  (tasks, projectId) => tasks.filter((task) => task.projectId === projectId)
-);
-
 export const selectTaskById = createSelector(
   selectTasks,
   (_: RootState, taskId: string) => taskId,
@@ -23,3 +17,9 @@ export const selectFilteredTasks = (state: RootState) => {
     task.title.toLowerCase().includes(normalizedFilterText)
   );
 };
+
+export const selectTasksByProjectId = createSelector(
+  selectFilteredTasks,
+  (_: RootState, projectId: string) => projectId,
+  (tasks, projectId) => tasks.filter((task) => task.projectId === projectId)
+);
