@@ -15,7 +15,10 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import { useNavigate, useParams } from "react-router-dom";
 
-export const ProjectItem = ({ project }: ProjectItemProps) => {
+export const ProjectItem = ({
+  project,
+  onAddPeopleClick,
+}: ProjectItemProps) => {
   const people = useSelector((state: RootState) =>
     selectProjectPeople(state, project.id)
   );
@@ -66,6 +69,7 @@ export const ProjectItem = ({ project }: ProjectItemProps) => {
       </CardActionArea>
       <CardActions sx={{ p: 0 }}>
         <ButtonBase
+          onClick={onAddPeopleClick}
           sx={{
             bgcolor: "#e7f0ff",
             color: "secondary.main",
@@ -84,4 +88,5 @@ export const ProjectItem = ({ project }: ProjectItemProps) => {
 
 type ProjectItemProps = {
   project: Project;
+  onAddPeopleClick: () => void;
 };
