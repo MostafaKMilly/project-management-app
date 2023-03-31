@@ -20,6 +20,7 @@ import { deleteProject } from "@/state/slices";
 import { useGoupedTasksByDate } from "../../hooks";
 import _ from "lodash";
 import { AddTaskDialog } from "../../components";
+import TaksPlaceholderImage from "@/assets/images/TaksPlaceholder.svg";
 
 export const TasksList = () => {
   const groupedTasks = useGoupedTasksByDate();
@@ -133,6 +134,14 @@ export const TasksList = () => {
           </Stack>
         </Stack>
       ))}
+      {projects.length === 0 && (
+        <Stack spacing={3} p={4} alignItems="center">
+          <img src={TaksPlaceholderImage} width={200} />
+          <Typography variant="body1" sx={{ color: "grey.900" }}>
+            There is no tasks
+          </Typography>
+        </Stack>
+      )}
       <EditProjectDialog
         open={isDialogOpen("edit_project")}
         onClose={closeDialog}

@@ -1,4 +1,12 @@
-import { Button, Grid, InputBase, Box, Paper } from "@mui/material";
+import {
+  Button,
+  Grid,
+  InputBase,
+  Box,
+  Paper,
+  Stack,
+  Typography,
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import {
@@ -13,6 +21,7 @@ import { useState } from "react";
 import { selectFilteredProjects } from "@/state/selectors/projectSelectors";
 import { RootState } from "@/state/store";
 import { useProjectsDialog } from "./hooks";
+import ProjectPlaceholderImage from "@/assets/images/ProjectPlaceholder.svg";
 
 export const Projects = () => {
   const [search, setSearch] = useState("");
@@ -54,6 +63,14 @@ export const Projects = () => {
                 />
               </Grid>
             ))}
+            {projects.length === 0 && (
+              <Stack spacing={3} p={4} m="0 auto">
+                <img src={ProjectPlaceholderImage} width={200} />
+                <Typography variant="body1" sx={{ color: "grey.900" }}>
+                  There is no projects
+                </Typography>
+              </Stack>
+            )}
           </ProjectsList>
         </Box>
       </Grid>
