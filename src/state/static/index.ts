@@ -11,49 +11,55 @@ export const defaultTasks: Task[] = [
     id: "1",
     title: "Task 1",
     projectId: "project_1",
-    assignedTo: "John Doe",
+    assignedTo: "1",
     isCompleted: false,
     description: "This task is important",
+    creationDate : "3/31/2023"
   },
   {
     id: "2",
     title: "Task 2",
     projectId: "project_1",
-    assignedTo: "Jane Doe",
+    assignedTo: "2",
     isCompleted: true,
     description: "This task is important",
+    creationDate : "2023-6-4"
   },
   {
     id: "3",
     title: "Task 3",
     projectId: "project_2",
-    assignedTo: "John Smith",
+    assignedTo: "3",
     isCompleted: false,
     description: "This task is important",
+    creationDate : "3/31/2023"
   },
   {
     id: "4",
     title: "Task 4",
     projectId: "project_2",
-    assignedTo: "Jane Smith",
+    assignedTo: "4",
     isCompleted: true,
     description: "This task is important",
+    creationDate : "5/31/2023"
   },
   {
     id: "5",
     title: "Task 5",
     projectId: "project_3",
-    assignedTo: "John Doe",
+    assignedTo: "1",
     isCompleted: false,
     description: "This task is important",
+    creationDate : "7/31/2023"
   },
   {
     id: "6",
     title: "Task 6",
     projectId: "project_3",
-    assignedTo: "Jane Doe",
+    assignedTo: "2",
     isCompleted: true,
     description: "This task is important",
+    creationDate : "3/31/2023"
   },
 ];
 

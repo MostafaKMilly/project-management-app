@@ -3,3 +3,4 @@ export { ProjectsList } from "./ProjectsList";
 export { AddPeopleForm } from "./AddPeopleForm";
 export { AddPeopleDialog } from "./AddPeopleDialog";
 export { AddProjectDialog } from "./AddProjectDialog";
+export { AddTaskDialog } from "./AddTaskDialog";

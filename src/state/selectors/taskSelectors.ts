@@ -15,3 +15,11 @@ export const selectTaskById = createSelector(
   (_: RootState, taskId: string) => taskId,
   (tasks, taskId) => tasks.find((task) => task.id === taskId)
 );
+
+export const selectFilteredTasks = (state: RootState) => {
+  const { tasks, filterText } = state.task;
+  const normalizedFilterText = filterText.trim().toLowerCase();
+  return tasks.filter((task) =>
+    task.title.toLowerCase().includes(normalizedFilterText)
+  );
+};

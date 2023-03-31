@@ -1,15 +1,7 @@
-import React from "react";
+import { useDialog } from "@/shared";
 
 export const useProjectsDialog = () => {
-  const [dialog, setDialog] = React.useState<Dialog>("unset");
-
-  const isDialogOpen = (currentDialog: Dialog) => dialog === currentDialog;
-
-  const closeDialog = () => setDialog("unset");
-
-  const openDialog = (dialog: Dialog) => setDialog(dialog);
-
-  return { isDialogOpen, closeDialog, openDialog };
+  return useDialog<Dialog>();
 };
 
 type Dialog = "add_project" | "add_people" | "unset";

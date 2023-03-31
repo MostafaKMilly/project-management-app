@@ -3,22 +3,24 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import _ from "lodash";
 
-export const useAddProjectForm = ({
+export const useProjectForm = ({
   onSubmit,
+  defaultValue,
 }: {
   onSubmit: (project: Project) => void;
+  defaultValue?: Project;
 }) => {
   const formik = useFormik<Pick<Project, "name">>({
-    initialValues: {
+    initialValues: defaultValue || {
       name: "",
     },
     onSubmit: (values) => {
-      const newProject: Project = {
+      const project: Project = {
         name: values.name,
-        createdAt: new Date().toLocaleString(),
-        id: _.uniqueId(values.name),
+        createdAt: new Date().toLocaleDateString(),
+        id: !defaultValue ? _.uniqueId(values.name) : defaultValue.id,
       };
-      onSubmit(newProject);
+      onSubmit(project);
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Name is required"),

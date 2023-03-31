@@ -3,7 +3,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import {
   AddPeopleDialog,
-  AddPeopleForm,
   AddProjectDialog,
   ProjectItem,
   ProjectsList,
@@ -14,7 +13,6 @@ import { useState } from "react";
 import { selectFilteredProjects } from "@/state/selectors/projectSelectors";
 import { RootState } from "@/state/store";
 import { useProjectsDialog } from "./hooks";
-import { GenericDialog } from "@/shared";
 
 export const Projects = () => {
   const [search, setSearch] = useState("");
@@ -60,7 +58,7 @@ export const Projects = () => {
         </Box>
       </Grid>
       <Grid item xs={12} sm={8} height="100%">
-        <Paper sx={{ height: "100%", p: 5 }} elevation={0}>
+        <Paper sx={{ height: "100%", p: { xs: 2, sm: 5 } }} elevation={0}>
           <Outlet />
         </Paper>
       </Grid>

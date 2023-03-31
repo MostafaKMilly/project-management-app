@@ -5,10 +5,12 @@ export type Task = {
   description?: string;
   isCompleted: boolean;
   assignedTo: string;
+  creationDate: string;
 };
 
 export type TaskState = {
   tasks: Task[];
+  filterText: string;
 };
 
 export type TaskPayload = Omit<Task, "id">;

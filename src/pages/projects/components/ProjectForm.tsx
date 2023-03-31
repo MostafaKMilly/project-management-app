@@ -2,35 +2,36 @@ import {
   Box,
   Stack,
   TextField,
-  Button,
   FormLabel,
   FormControl,
-  Typography,
   FormHelperText,
 } from "@mui/material";
-import { Form } from "formik";
-import { useAddProjectForm } from "../hooks/useAddProjectForm";
+import { useProjectForm } from "../hooks/useProjectForm";
 import { Project } from "@/state/types";
 
-export const AddProjectForm = ({
+export const ProjectForm = ({
   onSubmit,
+  defaultValue,
 }: {
   onSubmit: (project: Project) => void;
+  defaultValue?: Project;
 }) => {
   const { getFieldProps, handleSubmit, touched, errors, isValid, dirty } =
-    useAddProjectForm({
+    useProjectForm({
       onSubmit,
+      defaultValue,
     });
 
   return (
     <Box p={4} width="100%">
       <form
-        onSubmit={() => {
+        onSubmit={(e) => {
+          e.preventDefault();
           if (isValid) {
             handleSubmit();
           }
         }}
-        id="add_project_form"
+        id="project_form"
       >
         <Stack spacing={3}>
           <FormControl error={touched.name && Boolean(errors.name)}>

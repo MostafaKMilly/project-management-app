@@ -15,11 +15,12 @@ const projectSlice = createSlice({
     },
     updateProject: (state, action: PayloadAction<Project>) => {
       const index = state.projects.findIndex((p) => p.id === action.payload.id);
+      console.log(JSON.stringify(state.projects));
       if (index !== -1) {
         state.projects[index] = action.payload;
       }
     },
-    deleteProject: (state, action: PayloadAction<string>) => {
+    deleteProject: (state, action: PayloadAction<string | undefined>) => {
       state.projects = state.projects.filter((p) => p.id !== action.payload);
     },
   },

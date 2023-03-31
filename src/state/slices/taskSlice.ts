@@ -4,6 +4,7 @@ import { defaultTasks } from "../static";
 
 const initialState: TaskState = {
   tasks: defaultTasks,
+  filterText: "",
 };
 
 const taskSlice = createSlice({
@@ -22,9 +23,13 @@ const taskSlice = createSlice({
     deleteTask: (state, action: PayloadAction<string>) => {
       state.tasks = state.tasks.filter((t) => t.id !== action.payload);
     },
+    updateFilterText: (state, action) => {
+      state.filterText = action.payload;
+    },
   },
 });
 
-export const { createTask, updateTask, deleteTask } = taskSlice.actions;
+export const { createTask, updateTask, deleteTask, updateFilterText } =
+  taskSlice.actions;
 
 export default taskSlice.reducer;

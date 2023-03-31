@@ -22,7 +22,8 @@ export const AddPeopleForm = ({
   return (
     <Box p={4} width="100%">
       <form
-        onSubmit={() => {
+        onSubmit={(e) => {
+          e.preventDefault();
           if (isValid) {
             handleSubmit();
           }
