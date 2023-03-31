@@ -1,6 +1,5 @@
 ## Todo React Application
 
-![Image](https://ibb.co/mX5f5Y5)
 Todo app is a web application that helps you keep track of your tasks and projects. With this app, you can create projects, add tasks to your projects, assign tasks to people, and mark tasks as completed. This application is built with React, Redux Toolkit, and MUI (material-ui).
 
 I choose redux toolkit due to heavy front-end logic (I implement additional feature as you will see below).
