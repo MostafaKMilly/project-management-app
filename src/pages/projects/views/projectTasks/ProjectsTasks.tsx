@@ -1,5 +1,4 @@
 import { selectProjectById } from "@/state/selectors/projectSelectors";
-import { selectTasksByProjectId } from "@/state/selectors/taskSelectors";
 import { RootState } from "@/state/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -10,6 +9,7 @@ import {
   IconButton,
   Button,
   Divider,
+  TextField,
 } from "@mui/material";
 import { GenericDialog, useDialog } from "@/shared";
 import EditIcon from "@mui/icons-material/Edit";
@@ -19,7 +19,8 @@ import { useGoupedTasksByDate } from "../../hooks";
 import { TaskItem } from "../../components/TaskItem";
 import { AddTaskDialog } from "../../components";
 import { EditProjectDialog } from "../../components/EditProjectDialog";
-import { deleteProject } from "@/state/slices";
+import { deleteProject, updateFilterText } from "@/state/slices";
+import SearchIcon from "@mui/icons-material/Search";
 
 export const ProjectsTasks = () => {
   const { projectId } = useParams();
@@ -28,9 +29,7 @@ export const ProjectsTasks = () => {
   const project = useSelector((state: RootState) =>
     selectProjectById(state, projectId as string)
   );
-  const tasks = useSelector((state: RootState) =>
-    selectTasksByProjectId(state, projectId as string)
-  );
+  const filterValue = useSelector((state: RootState) => state.task.filterText);
   const { closeDialog, isDialogOpen, openDialog } = useDialog<
     "add_task" | "edit_project" | "delete_project"
   >();
@@ -40,6 +39,13 @@ export const ProjectsTasks = () => {
     dispatch(deleteProject(project?.id));
     navigate("/projects");
     closeDialog();
+  };
+
+  const handleInputFilterChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const filterText = event.target.value;
+    dispatch(updateFilterText(filterText));
   };
 
   return (
@@ -107,6 +113,23 @@ export const ProjectsTasks = () => {
           <AddIcon sx={{ color: "common.white" }} />
         </IconButton>
       </Box>
+
+      <TextField
+        InputProps={{
+          startAdornment: <SearchIcon sx={{ color: "common.black", mr: 1 }} />,
+        }}
+        fullWidth
+        sx={{
+          display: {
+            xs: "block",
+            sm: "none",
+          },
+          my: 2,
+        }}
+        placeholder="Search any tasks"
+        value={filterValue}
+        onChange={handleInputFilterChange}
+      />
       <Stack spacing={2} mt={2}>
         {Object.entries(groupedTasks(project?.id as string)).map(
           ([date, tasks]) => (

@@ -7,6 +7,7 @@ import {
   Stack,
   Divider,
   IconButton,
+  TextField,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
@@ -16,11 +17,13 @@ import { TaskItem } from "../../components/TaskItem";
 import { GenericDialog, useDialog } from "@/shared";
 import { EditProjectDialog } from "../../components/EditProjectDialog";
 import { Project } from "@/state/types";
-import { deleteProject } from "@/state/slices";
+import { deleteProject, updateFilterText } from "@/state/slices";
 import { useGoupedTasksByDate } from "../../hooks";
 import _ from "lodash";
 import { AddTaskDialog } from "../../components";
 import TaksPlaceholderImage from "@/assets/images/TaksPlaceholder.svg";
+import SearchIcon from "@mui/icons-material/Search";
+import { RootState } from "@/state/store";
 
 export const TasksList = () => {
   const groupedTasks = useGoupedTasksByDate();
@@ -30,10 +33,19 @@ export const TasksList = () => {
   const { closeDialog, isDialogOpen, openDialog } = useDialog<
     "add_task" | "edit_project" | "delete_project"
   >();
+  const filterValue = useSelector((state: RootState) => state.task.filterText);
 
   const handleDeleteProject = () => {
     dispatch(deleteProject(selectedProject?.id));
     closeDialog();
+  };
+
+
+  const handleInputFilterChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const filterText = event.target.value;
+    dispatch(updateFilterText(filterText));
   };
 
   return (
@@ -41,6 +53,23 @@ export const TasksList = () => {
       <Typography variant="h1" sx={{ color: "common.black", mb: 4 }}>
         Tasks List
       </Typography>
+
+      <TextField
+        InputProps={{
+          startAdornment: <SearchIcon sx={{ color: "common.black", mr: 1 }} />,
+        }}
+        fullWidth
+        sx={{
+          display: {
+            xs: "block",
+            sm: "none",
+          },
+          my: 2,
+        }}
+        placeholder="Search any tasks"
+        value={filterValue}
+        onChange={handleInputFilterChange}
+      />
       {projects.map((project) => (
         <Stack spacing={2}>
           <Box
