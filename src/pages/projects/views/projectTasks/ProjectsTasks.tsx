@@ -2,7 +2,7 @@ import { selectProjectById } from "@/state/selectors/projectSelectors";
 import { selectTasksByProjectId } from "@/state/selectors/taskSelectors";
 import { RootState } from "@/state/store";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -24,6 +24,7 @@ import { deleteProject } from "@/state/slices";
 export const ProjectsTasks = () => {
   const { projectId } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const project = useSelector((state: RootState) =>
     selectProjectById(state, projectId as string)
   );
@@ -37,6 +38,7 @@ export const ProjectsTasks = () => {
 
   const handleDeleteProject = () => {
     dispatch(deleteProject(project?.id));
+    navigate("/projects");
     closeDialog();
   };
 
