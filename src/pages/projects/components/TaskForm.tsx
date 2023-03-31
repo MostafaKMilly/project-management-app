@@ -58,7 +58,11 @@ export const TaskForm = ({
           <FormControl>
             <FormControlLabel
               control={
-                <Checkbox {...getFieldProps("isCompleted")} color="primary" />
+                <Checkbox
+                  {...getFieldProps("isCompleted")}
+                  checked={getFieldProps("isCompleted").value}
+                  color="primary"
+                />
               }
               label="Completed"
             />
