@@ -12,11 +12,11 @@ import {
   ListItemText,
   ListItemIcon,
 } from "@mui/material";
-import { DropDownMenu, useDialog } from "@/shared";
+import { DropDownMenu, GenericDialog, useDialog } from "@/shared";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { updateTask } from "@/state/slices";
+import { deleteTask, updateTask } from "@/state/slices";
 import { EditTaskDialog } from "./EditTaskDialog";
 
 export const TaskItem = ({ task }: TaskItemProps) => {
@@ -27,15 +27,25 @@ export const TaskItem = ({ task }: TaskItemProps) => {
   const { closeDialog, isDialogOpen, openDialog } = useDialog<
     "delete_task" | "edit_task"
   >();
+
   const toggleCompleteTask = (_: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(updateTask({ ...task, isCompleted: !task.isCompleted }));
+  };
+
+  const handleDeleteTask = () => {
+    dispatch(deleteTask(task.id));
+    closeDialog();
   };
 
   return (
     <Box display="flex" justifyContent="space-between" alignItems="center">
       <Box display="flex" flexWrap="wrap" alignItems="center">
         <Box display="flex" columnGap={1} mr={7} alignItems="center">
-          <Checkbox checked={task.isCompleted} onChange={toggleCompleteTask} />
+          <Checkbox
+            checked={task.isCompleted}
+            color="success"
+            onChange={toggleCompleteTask}
+          />
           <Typography
             variant="body1"
             fontWeight={400}
@@ -85,6 +95,22 @@ export const TaskItem = ({ task }: TaskItemProps) => {
         defaultValue={task}
         projectId={task.projectId}
       />
+      <GenericDialog
+        open={isDialogOpen("delete_task")}
+        onClose={closeDialog}
+        onSubmit={handleDeleteTask}
+        dialog={{
+          title: "Delete Task Confimation",
+          submitButton: {
+            label: "Delete",
+            color: "error",
+          },
+        }}
+      >
+        <Typography variant="body1" sx={{ color: "grey.900" }}>
+          Are you sure you want to delete {task.title} task ?
+        </Typography>
+      </GenericDialog>
     </Box>
   );
 };
