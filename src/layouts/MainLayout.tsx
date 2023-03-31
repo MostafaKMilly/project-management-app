@@ -16,7 +16,7 @@ export const MainLayout = () => {
   }, [child, navigate]);
 
   return (
-    <Box display="flex">
+    <Box display="flex" height="100%">
       <AppBar />
       <Container
         maxWidth={false}

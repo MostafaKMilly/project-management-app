@@ -58,7 +58,7 @@ export const Projects = () => {
         </Box>
       </Grid>
       <Grid item xs={12} sm={8} height="100%">
-        <Paper sx={{ height: "100%", p: { xs: 2, sm: 5 } }} elevation={0}>
+        <Paper sx={{ height: "auto", p: { xs: 2, sm: 5 } }} elevation={0}>
           <Outlet />
         </Paper>
       </Grid>
