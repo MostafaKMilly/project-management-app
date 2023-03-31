@@ -92,6 +92,10 @@ export const TasksList = () => {
               Add new task
             </Button>
             <IconButton
+              onClick={() => {
+                openDialog("add_task");
+                setSelectedProject(project);
+              }}
               color="secondary"
               disableRipple
               sx={{
