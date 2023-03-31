@@ -57,6 +57,14 @@ export const ProjectItem = ({
                 sx={{ width: 25, height: 25 }}
               />
             ))}
+            {people.length === 0 && (
+              <Typography
+                fontSize={9}
+                sx={{ color: "grey.700", mb: "13px", mt: "6px" }}
+              >
+                There is no people
+              </Typography>
+            )}
           </AvatarGroup>
           <Typography variant="body2" fontWeight={700} gutterBottom>
             {project.name}

@@ -4,6 +4,7 @@ import AddIcon from "@mui/icons-material/Add";
 import {
   AddPeopleDialog,
   AddPeopleForm,
+  AddProjectDialog,
   ProjectItem,
   ProjectsList,
 } from "./components";
@@ -67,6 +68,10 @@ export const Projects = () => {
         open={isDialogOpen("add_people")}
         onClose={() => closeDialog()}
         projectId={selectedProject}
+      />
+      <AddProjectDialog
+        open={isDialogOpen("add_project")}
+        onClose={() => closeDialog()}
       />
     </Grid>
   );

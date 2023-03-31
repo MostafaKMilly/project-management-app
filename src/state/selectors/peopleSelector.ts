@@ -11,7 +11,8 @@ export const selectPersonById = createSelector(
 );
 
 export const selectProjectPeople = createSelector(
-  [selectPeople, (_: RootState, projectId: string) => projectId],
+  selectPeople,
+  (_: RootState, projectId: string) => projectId,
   (people, projectId) =>
     people.filter((person) => person.projectId === projectId)
 );

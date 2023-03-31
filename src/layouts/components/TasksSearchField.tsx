@@ -9,6 +9,7 @@ export const TasksSearchField = () => {
         startAdornment: <SearchIcon sx={{ color: "common.black", mr: 1 }} />,
       }}
       sx={{
+        height: "40px",
         "& .MuiInputBase-root": {
           width: "280px",
           height: "40px",
