@@ -14,6 +14,7 @@ import { selectProjectPeople } from "@/state/selectors/peopleSelector";
 import { useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import { useNavigate, useParams } from "react-router-dom";
+import { selectTasks } from "@/state/selectors/taskSelectors";
 
 export const ProjectItem = ({
   project,
@@ -22,6 +23,8 @@ export const ProjectItem = ({
   const people = useSelector((state: RootState) =>
     selectProjectPeople(state, project.id)
   );
+  const tasks = useSelector(selectTasks);
+  const projectTasks = tasks.filter((task) => task.projectId === project.id);
   const navigate = useNavigate();
   const { projectId } = useParams();
 
@@ -71,7 +74,8 @@ export const ProjectItem = ({
           </Typography>
 
           <Typography sx={{ color: "grey.400", fontSize: 10 }}>
-            3 new comments <span style={{ color: "red" }}>*</span>
+            {projectTasks.length} tasks added{" "}
+            <span style={{ color: "red" }}>*</span>
           </Typography>
         </CardContent>
       </CardActionArea>
