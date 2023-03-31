@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PeopleState, Person } from "../types";
+import { defaultPeople } from "../static";
 
 const initialState: PeopleState = {
-  people: [],
+  people: defaultPeople,
 };
 
 const peopleSlice = createSlice({

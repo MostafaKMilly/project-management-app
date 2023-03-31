@@ -11,6 +11,7 @@ export const TasksSearchField = () => {
       sx={{
         "& .MuiInputBase-root": {
           width: "280px",
+          height: "40px",
         },
         display: {
           xs: "none",

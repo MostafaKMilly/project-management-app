@@ -3,46 +3,67 @@ import {
   AvatarGroup,
   ButtonBase,
   Card,
+  CardActionArea,
   CardActions,
   CardContent,
   Typography,
 } from "@mui/material";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import { Project } from "@/state/types";
+import { selectProjectPeople } from "@/state/selectors/peopleSelector";
+import { useSelector } from "react-redux";
+import { RootState } from "@/state/store";
+import { useNavigate, useParams } from "react-router-dom";
 
-export const ProjectItem = () => {
+export const ProjectItem = ({ project }: ProjectItemProps) => {
+  const people = useSelector((state: RootState) =>
+    selectProjectPeople(state, project.id)
+  );
+  const navigate = useNavigate();
+  const { projectId } = useParams();
+
+  const handleNavigate = () => {
+    if (projectId === project.id) {
+      navigate("/");
+    } else {
+      navigate(project.id);
+    }
+  };
   return (
     <Card elevation={0}>
-      <CardContent sx={{ p: 3 }}>
-        <AvatarGroup sx={{ justifyContent: "left", mb: 1.5 }}>
-          <Avatar
-            alt="Remy Sharp"
-            src="/static/images/avatar/1.jpg"
-            sx={{ width: 20, height: 20 }}
-          />
-          <Avatar
-            alt="Travis Howard"
-            src="/static/images/avatar/2.jpg"
-            sx={{ width: 20, height: 20 }}
-          />
-          <Avatar
-            alt="Cindy Baker"
-            src="/static/images/avatar/3.jpg"
-            sx={{ width: 20, height: 20 }}
-          />
-          <Avatar
-            alt="Agnes Walker"
-            src="/static/images/avatar/4.jpg"
-            sx={{ width: 20, height: 20 }}
-          />
-        </AvatarGroup>
-        <Typography variant="body2" fontWeight={700} gutterBottom>
-          Olsen Project
-        </Typography>
+      <CardActionArea
+        sx={{ background: projectId === project.id ? "#f5f7ff" : "inherit" }}
+        disableRipple
+        onClick={handleNavigate}
+      >
+        <CardContent sx={{ p: 3 }}>
+          <AvatarGroup
+            max={4}
+            sx={{ justifyContent: "left", mb: 1.5 }}
+            componentsProps={{
+              additionalAvatar: {
+                sx: { width: 25, height: 25, fontSize: 10 },
+              },
+            }}
+          >
+            {people.map((person) => (
+              <Avatar
+                key={person.id}
+                alt={person.name}
+                src={person.image}
+                sx={{ width: 25, height: 25 }}
+              />
+            ))}
+          </AvatarGroup>
+          <Typography variant="body2" fontWeight={700} gutterBottom>
+            {project.name}
+          </Typography>
 
-        <Typography sx={{ color: "grey.400", fontSize: 10 }}>
-          3 new comments <span style={{ color: "red" }}>*</span>
-        </Typography>
-      </CardContent>
+          <Typography sx={{ color: "grey.400", fontSize: 10 }}>
+            3 new comments <span style={{ color: "red" }}>*</span>
+          </Typography>
+        </CardContent>
+      </CardActionArea>
       <CardActions sx={{ p: 0 }}>
         <ButtonBase
           sx={{
@@ -59,4 +80,8 @@ export const ProjectItem = () => {
       </CardActions>
     </Card>
   );
+};
+
+type ProjectItemProps = {
+  project: Project;
 };

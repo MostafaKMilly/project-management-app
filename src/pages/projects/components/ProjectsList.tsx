@@ -1,14 +1,10 @@
-import { Box, Grid } from "@mui/material";
-import { ProjectItem } from "./ProjectItem";
+import { Grid } from "@mui/material";
+import { PropsWithChildren } from "react";
 
-export const ProjectsList = () => {
+export const ProjectsList = ({ children }: PropsWithChildren) => {
   return (
     <Grid container rowSpacing={0.5} columnSpacing={0.5}>
-      {new Array(5).fill("").map((item, index) => (
-        <Grid item xs={6} key={index}>
-          <ProjectItem key={index} />
-        </Grid>
-      ))}
+      {children}
     </Grid>
   );
 };

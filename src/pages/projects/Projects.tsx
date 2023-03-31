@@ -1,15 +1,25 @@
 import { Button, Grid, InputBase, Box, Paper } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
-import { ProjectsList } from "./components";
+import { ProjectItem, ProjectsList } from "./components";
 import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import { selectFilteredProjects } from "@/state/selectors/projectSelectors";
+import { RootState } from "@/state/store";
 
 export const Projects = () => {
+  const [search, setSearch] = useState("");
+  const projects = useSelector((state: RootState) =>
+    selectFilteredProjects(state, search)
+  );
+
   return (
     <Grid container columnSpacing={2} rowGap={4} height="100%" mt={1}>
       <Grid item xs={12} sm={4}>
         <Box sx={{ bgcolor: "#f6f7f9", height: "100%" }}>
           <InputBase
+            onChange={(event) => setSearch(event.target.value)}
             placeholder="Search Project ..."
             sx={{ p: 2, bgcolor: "common.white" }}
             fullWidth
@@ -18,7 +28,13 @@ export const Projects = () => {
           <Button fullWidth endIcon={<AddIcon />}>
             Add new project
           </Button>
-          <ProjectsList />
+          <ProjectsList>
+            {projects.map((project) => (
+              <Grid item xs={6} key={project.id}>
+                <ProjectItem project={project} />
+              </Grid>
+            ))}
+          </ProjectsList>
         </Box>
       </Grid>
       <Grid item xs={12} sm={8} height="100%">

@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Project, ProjectState } from "../types";
+import { defaultProjects } from "../static";
 
 const initialState: ProjectState = {
-  projects: [],
+  projects: defaultProjects,
 };
 
 const projectSlice = createSlice({

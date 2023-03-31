@@ -30,7 +30,7 @@ const router = createBrowserRouter([
             element: <TasksList />,
           },
           {
-            path: ":taskId",
+            path: ":projectId",
             element: <ProjectsTasks />,
           },
         ],

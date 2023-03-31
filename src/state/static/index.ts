@@ -58,8 +58,32 @@ export const defaultTasks: Task[] = [
 ];
 
 export const defaultPeople: Person[] = [
-  { id: "1", name: "John Doe", projectId: "1" },
-  { id: "2", name: "Jane Doe", projectId: "2" },
-  { id: "3", name: "John Smith", projectId: "3" },
-  { id: "4", name: "Jane Smith", projectId: "1" },
+  {
+    id: "1",
+    name: "John Doe",
+    projectId: "1",
+    image:
+      "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/da/dae0ebfdf40e6f460109d0fe059fc80943e8e59a.jpg",
+  },
+  {
+    id: "2",
+    name: "Jane Doe",
+    projectId: "2",
+    image:
+      "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/00/0079b31228692b6ede046499ca82491fe6897b61.jpg",
+  },
+  {
+    id: "3",
+    name: "John Smith",
+    projectId: "3",
+    image:
+      "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/00/0079b31228692b6ede046499ca82491fe6897b61.jpg",
+  },
+  {
+    id: "4",
+    name: "Jane Smith",
+    projectId: "1",
+    image:
+      "https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/00/0079b31228692b6ede046499ca82491fe6897b61.jpg",
+  },
 ];
